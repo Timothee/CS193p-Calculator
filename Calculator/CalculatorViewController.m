@@ -7,54 +7,102 @@
 //
 
 #import "CalculatorViewController.h"
+#import "CalculatorBrain.h"
+
+@interface CalculatorViewController()
+@property (nonatomic) BOOL userIsInTheMiddleOfEnteringANumber;
+@property (nonatomic, strong) CalculatorBrain *brain;
+@end
+
 
 @implementation CalculatorViewController
+@synthesize fullOperationDisplay;
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Release any cached data, images, etc that aren't in use.
+@synthesize display, userIsInTheMiddleOfEnteringANumber;
+@synthesize brain = _brain;
+
+-(CalculatorBrain *) brain {
+    if (!_brain) {
+        _brain = [[CalculatorBrain alloc] init];
+    }
+    return _brain;
+}
+-(void) clearEqualSignFromFullDisplay {
+    if ([self.fullOperationDisplay.text hasSuffix:@"="]) {
+        self.fullOperationDisplay.text = [self.fullOperationDisplay.text substringToIndex:self.fullOperationDisplay.text.length-1];
+    }
 }
 
-#pragma mark - View lifecycle
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+- (IBAction)digitPressed:(UIButton *)sender {
+    [self clearEqualSignFromFullDisplay];
+    NSString *digit = [sender currentTitle];
+    if (self.userIsInTheMiddleOfEnteringANumber) {
+        self.display.text = [self.display.text stringByAppendingString:digit];
+    } else {
+        self.display.text = digit;
+        self.userIsInTheMiddleOfEnteringANumber = YES;
+    }
 }
 
-- (void)viewDidUnload
-{
+- (IBAction)dotPressed {
+    [self clearEqualSignFromFullDisplay];
+    if (self.userIsInTheMiddleOfEnteringANumber) {
+        if ([self.display.text rangeOfString:@"."].location == NSNotFound) {
+            self.display.text = [self.display.text stringByAppendingString:@"."];
+        }
+    } else {
+        self.display.text = @"0.";
+        self.userIsInTheMiddleOfEnteringANumber = YES;
+    }
+}
+
+- (IBAction)enterPressed {
+    [self.brain pushOperand:[self.display.text doubleValue]];
+    self.userIsInTheMiddleOfEnteringANumber = NO;
+    self.fullOperationDisplay.text = [self.fullOperationDisplay.text stringByAppendingFormat:@"%@ ", self.display.text];
+
+}
+
+
+- (IBAction)operationPressed:(UIButton *)sender {
+    [self clearEqualSignFromFullDisplay];
+    
+    if (self.userIsInTheMiddleOfEnteringANumber && [sender.currentTitle isEqualToString:@"+/-"]) {
+        if ([self.display.text hasPrefix:@"-"]) {
+            self.display.text = [self.display.text substringFromIndex:1];
+        } else {
+            self.display.text = [NSString stringWithFormat:@"-%@", self.display.text];
+        }
+    } else {
+        if (self.userIsInTheMiddleOfEnteringANumber) {
+            [self enterPressed];
+        }
+        double result = [self.brain performOperation:sender.currentTitle];
+        self.display.text = [NSString stringWithFormat:@"%g", result];
+        self.fullOperationDisplay.text = [self.fullOperationDisplay.text stringByAppendingFormat:@"%@ =", sender.currentTitle];
+    }
+}
+
+- (IBAction)clearDisplay {
+    self.display.text = @"0";
+    self.fullOperationDisplay.text = @"";
+    [self.brain clearCalculator];
+    self.userIsInTheMiddleOfEnteringANumber = NO;
+}
+
+
+- (IBAction)backspace {
+    self.display.text = [self.display.text substringToIndex:[self.display.text length]-1];
+    if (self.display.text.length == 0) {
+        self.display.text = @"0";
+        self.userIsInTheMiddleOfEnteringANumber = NO;
+    }
+}
+
+
+
+- (void)viewDidUnload {
+    [self setFullOperationDisplay:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-	[super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-	[super viewDidDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-}
-
 @end
