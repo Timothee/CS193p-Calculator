@@ -35,7 +35,7 @@
 
 - (NSMutableDictionary *) testVariableValues {
     if (!_testVariableValues) {
-        _testVariableValues = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"x", @"1", @"a", @"2", @"b", @"3", nil];
+        _testVariableValues = [[NSMutableDictionary alloc] initWithObjectsAndKeys: @"1", @"a", @"2", @"b", @"3", @"x", nil];
     }
     return _testVariableValues;
 }
@@ -46,17 +46,29 @@
     }
 }
 
--(void) updateDisplays {
-    self.display.text = [NSString stringWithFormat:@"%g", [CalculatorBrain runProgram:self.brain.program usingVariableValues:self.testVariableValues]];
+
+// Returns the string of all variables currently used with their value
+-(NSString *) variablesString {
+    NSMutableString *variablesString = [NSMutableString string];
+    NSSet *variablesUsedInProgram = [CalculatorBrain variablesUsedInProgram:self.brain.program];
     
-    NSMutableString *variables = [NSMutableString stringWithString:@""];
-    for (NSString *variable in [CalculatorBrain variablesUsedInProgram:self.brain.program]) {
-        NSString *variableValue = [self.testVariableValues valueForKey:variable];
-        if (variableValue) {
-            [variables appendFormat:@"%@ = %@ ", variable, variableValue];
+    for (NSString *variable in self.testVariableValues) {
+        if ([variablesUsedInProgram containsObject:variable]) {
+            [variablesString appendFormat:@"%@ = %@  ", variable, [self.testVariableValues valueForKey:variable]];
         }
     }
-    self.variablesDisplay.text = variables;
+    return variablesString;
+}
+
+// Shortcut to update all displays
+-(void)updateDisplays:(NSString *)mainDisplayText {
+    if (mainDisplayText) {
+        self.display.text = mainDisplayText;
+    } else {
+        self.display.text = [NSString stringWithFormat:@"%g", [CalculatorBrain runProgram:self.brain.program usingVariableValues:self.testVariableValues]];
+    }
+    self.fullOperationDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
+    self.variablesDisplay.text = [self variablesString];
 }
 
 - (IBAction)digitPressed:(UIButton *)sender {
@@ -85,9 +97,7 @@
 - (IBAction)enterPressed {
     [self.brain pushOperand:[self.display.text doubleValue]];
     self.userIsInTheMiddleOfEnteringANumber = NO;
-    self.fullOperationDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
-                                      //[self.fullOperationDisplay.text stringByAppendingFormat:@"%@ ", self.display.text];
-
+    [self updateDisplays:nil];
 }
 
 - (IBAction)variablePressed:(UIButton *)sender {
@@ -95,8 +105,7 @@
         [self enterPressed];
     }
     [self.brain pushVariable:sender.currentTitle];
-    self.display.text = sender.currentTitle;
-    self.fullOperationDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
+    [self updateDisplays:sender.currentTitle];
     self.userIsInTheMiddleOfEnteringANumber = NO;
 }
 
@@ -114,29 +123,28 @@
         if (self.userIsInTheMiddleOfEnteringANumber) {
             [self enterPressed];
         }
-        double result = [self.brain performOperation:sender.currentTitle];
-        self.display.text = [NSString stringWithFormat:@"%g", result];
-        self.fullOperationDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
-        //[self.fullOperationDisplay.text stringByAppendingFormat:@"%@ =", sender.currentTitle];
+        [self.brain performOperation:sender.currentTitle];
+        [self updateDisplays:nil];
     }
 }
 
 - (IBAction)clearDisplay {
-    self.display.text = @"0";
-    self.fullOperationDisplay.text = @"";
     [self.brain clearCalculator];
+    [self updateDisplays:nil];
     self.userIsInTheMiddleOfEnteringANumber = NO;
 }
 
 - (IBAction)setVariableValues:(UIButton *)sender {
-//    if ([sender.currentTitle isEqualToString:@"Test 1"]) {
-//        self.testVariableValues = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"x", @"1", @"a", @"2", @"b", @"3", nil ];
-//    } else if ([sender.currentTitle isEqualToString:@"Test 2"]) {
-//        self.testVariableValues = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"x", @"0", @"a", @"-5", @"b", @"0.5", nil ];
-//    } else if ([sender.currentTitle isEqualToString:@"Test 3"]) {
-//        self.testVariableValues = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"x", @"1", @"a", @"2", @"b", @"3", nil ];
-//    }
-    [self updateDisplays];
+    if ([sender.currentTitle isEqualToString:@"Test 1"]) {
+        self.testVariableValues = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"1", @"a", @"2", @"b", @"3", @"x", nil ];
+    } else if ([sender.currentTitle isEqualToString:@"Test 2"]) {
+        self.testVariableValues = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"0", @"a", @"-5", @"b", @"0.5", @"x", nil ];
+    } else if ([sender.currentTitle isEqualToString:@"Test 3"]) {
+        self.testVariableValues = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"1", @"a", @"2", @"b", @"3", @"x", nil ];
+    } else if ([sender.currentTitle isEqualToString:@"Test 4"]) {
+        self.testVariableValues = nil;
+    }
+    [self updateDisplays:nil];
 }
 
 - (IBAction)backspace {

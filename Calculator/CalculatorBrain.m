@@ -181,8 +181,10 @@ NSSet *validOperations, *twoOperandOperations, *oneOperandOperations, *noOperand
     if ([program isKindOfClass:[NSArray class]]) {
         stack = [program mutableCopy];
         for (int i = 0; i < [stack count]; i++) {
-            if ([self isVariable:[stack objectAtIndex:i]]) {
-                [stack replaceObjectAtIndex:i withObject:[variableValues objectForKey:[stack objectAtIndex:i]]];
+            id topOfStack = [stack objectAtIndex:i];
+            if ([self isVariable:topOfStack]) {
+                NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+                [stack replaceObjectAtIndex:i withObject:[formatter numberFromString:[variableValues objectForKey:topOfStack]]];
             }
         }
     }
