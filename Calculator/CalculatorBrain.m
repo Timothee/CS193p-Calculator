@@ -208,6 +208,10 @@ NSSet *validOperations, *twoOperandOperations, *oneOperandOperations, *noOperand
     return nil;
 }
 
+-(void)undo {
+    [self.programStack removeLastObject];
+}
+
 -(void) clearCalculator {
     [self.programStack removeAllObjects];
 }

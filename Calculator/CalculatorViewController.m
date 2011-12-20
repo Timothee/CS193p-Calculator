@@ -147,11 +147,16 @@
     [self updateDisplays:nil];
 }
 
-- (IBAction)backspace {
-    self.display.text = [self.display.text substringToIndex:[self.display.text length]-1];
-    if (self.display.text.length == 0) {
-        self.display.text = @"0";
-        self.userIsInTheMiddleOfEnteringANumber = NO;
+- (IBAction)undo {
+    if (self.userIsInTheMiddleOfEnteringANumber) {
+        self.display.text = [self.display.text substringToIndex:[self.display.text length]-1];
+        if (self.display.text.length == 0) {
+            self.userIsInTheMiddleOfEnteringANumber = NO;
+            [self updateDisplays:nil];
+        }
+    } else {
+        [self.brain undo];
+        [self updateDisplays:nil];
     }
 }
 

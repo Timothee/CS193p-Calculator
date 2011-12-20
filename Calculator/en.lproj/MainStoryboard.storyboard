@@ -369,7 +369,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="backspace" destination="2" eventType="touchUpInside" id="taN-Ll-RQM"/>
+                                    <action selector="undo" destination="2" eventType="touchUpInside" id="c58-jH-UhS"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="YzK-0w-CLm">

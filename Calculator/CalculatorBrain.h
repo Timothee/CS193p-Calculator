@@ -14,6 +14,7 @@
 - (void) pushVariable:(NSString *)variable;
 - (double) performOperation:(NSString *)operation;
 - (void) clearCalculator;
+- (void) undo;
 
 @property (nonatomic, readonly) id program;
 
