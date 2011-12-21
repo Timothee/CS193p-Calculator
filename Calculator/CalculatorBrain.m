@@ -113,7 +113,7 @@ NSSet *validOperations, *twoOperandOperations, *oneOperandOperations, *noOperand
 }
 
 
-- (double)performOperation:(NSString *)operation
+- (id)performOperation:(NSString *)operation
 {
     if ([CalculatorBrain isOperation:operation]) {
         [self.programStack addObject:operation];
@@ -128,45 +128,69 @@ NSSet *validOperations, *twoOperandOperations, *oneOperandOperations, *noOperand
     return [operandObject doubleValue];
 }
 
-+(double) popOperandOffProgramStack:(NSMutableArray *)stack {
-    double result = 0;
++(id) popOperandOffProgramStack:(NSMutableArray *)stack {
+    id result;
     
     id topOfStack = [stack lastObject];
     if (topOfStack) [stack removeLastObject];
     
-    if ([topOfStack isKindOfClass:[NSNumber class]])
-    {
-        result = [topOfStack doubleValue];
-    }
-    else if ([topOfStack isKindOfClass:[NSString class]])
-    {
+    if ([topOfStack isKindOfClass:[NSNumber class]]) {
+        result = topOfStack;
+    } else if ([topOfStack isKindOfClass:[NSString class]]) { // if it's an NSString, it's an operation
         NSString *operation = topOfStack;
-        if ([operation isEqualToString:@"sin"]) {
-            result = sin([self popOperandOffProgramStack:stack]);
-        } else if ([operation isEqualToString:@"cos"]) {
-            result = cos([self popOperandOffProgramStack:stack]);
-        } else if ([operation isEqualToString:@"sqrt"]) {
-            result = sqrt([self popOperandOffProgramStack:stack]);
-        } else if ([operation isEqualToString:@"π"]) {
-            result = M_PI;
-        } else if ([operation isEqualToString:@"+/-"]) {
-            result = -[self popOperandOffProgramStack:stack];
-        } else if ([operation isEqualToString:@"+"]) {
-            result = [self popOperandOffProgramStack:stack] + [self popOperandOffProgramStack:stack];
-        } else if ([operation isEqualToString:@"*"]) {
-            result = [self popOperandOffProgramStack:stack] * [self popOperandOffProgramStack:stack];
-        } else if ([operation isEqualToString:@"-"]) {
-            result = - [self popOperandOffProgramStack:stack] + [self popOperandOffProgramStack:stack];
-        } else if ([operation isEqualToString:@"/"]) {
-            double divisor = [self popOperandOffProgramStack:stack];
-            if (divisor) result = [self popOperandOffProgramStack:stack] / divisor;
+        if ([noOperandOperations containsObject:operation]) {
+            if ([operation isEqualToString:@"π"]) {
+                result = [NSNumber numberWithDouble:M_PI];
+            }
+        } else {
+            id topOperand = [self popOperandOffProgramStack:stack];
+            if ([topOperand isKindOfClass:[NSString class]]) {
+                result = topOperand;
+            } else if ([topOperand isKindOfClass:[NSNumber class]]) {
+                if ([oneOperandOperations containsObject:operation]) {
+                    if ([operation isEqualToString:@"sin"]) {
+                        result = [NSNumber numberWithDouble:sin([topOperand doubleValue])];
+                    } else if ([operation isEqualToString:@"cos"]) {
+                        result = [NSNumber numberWithDouble:cos([topOperand doubleValue])];
+                    } else if ([operation isEqualToString:@"sqrt"]) {
+                        if ([topOperand compare:[NSNumber numberWithInt:0]] >= 0) {
+                            result = [NSNumber numberWithDouble:sqrt([topOperand doubleValue])];
+                        } else {
+                            result = @"Can't get square root of negative number.";
+                        }
+                    } else if ([operation isEqualToString:@"+/-"]) {
+                        result = [NSNumber numberWithDouble:-[topOperand doubleValue]];
+                    }
+                } else if ([twoOperandOperations containsObject:operation]) {
+                    id secondTopOperand = [self popOperandOffProgramStack:stack];
+                    if ([secondTopOperand isKindOfClass:[NSString class]]) {
+                        result = secondTopOperand;
+                    } else if ([secondTopOperand isKindOfClass:[NSNumber class]]) {
+                        if ([operation isEqualToString:@"+"]) {
+                            result = [NSNumber numberWithDouble:[secondTopOperand doubleValue] + [topOperand doubleValue]];
+                        } else if ([operation isEqualToString:@"*"]) {
+                            result = [NSNumber numberWithDouble:[secondTopOperand doubleValue] * [topOperand doubleValue]];
+                        } else if ([operation isEqualToString:@"-"]) {
+                            result = [NSNumber numberWithDouble:[secondTopOperand doubleValue] - [topOperand doubleValue]];
+                        } else if ([operation isEqualToString:@"/"]) {
+                            if ([topOperand isEqualToNumber:[NSNumber numberWithInt:0]]) {
+                                result = @"Can't divide by zero";
+                            } else {
+                                result = [NSNumber numberWithDouble:[secondTopOperand doubleValue] / [topOperand doubleValue]];
+                            }
+                        }
+                    } else {
+                        result = @"Need second operand.";
+                    }
+                }
+            }
         }
     }
     
     return result;
 }
 
-+ (double)runProgram:(id)program
++ (id)runProgram:(id)program
 {
     NSMutableArray *stack;
     if ([program isKindOfClass:[NSArray class]]) {
@@ -176,7 +200,7 @@ NSSet *validOperations, *twoOperandOperations, *oneOperandOperations, *noOperand
 }
 
 
-+ (double)runProgram:(id)program usingVariableValues:(NSDictionary *)variableValues {
++ (id)runProgram:(id)program usingVariableValues:(NSDictionary *)variableValues {
     NSMutableArray *stack;
     if ([program isKindOfClass:[NSArray class]]) {
         stack = [program mutableCopy];

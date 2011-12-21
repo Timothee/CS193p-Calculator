@@ -65,7 +65,14 @@
     if (mainDisplayText) {
         self.display.text = mainDisplayText;
     } else {
-        self.display.text = [NSString stringWithFormat:@"%g", [CalculatorBrain runProgram:self.brain.program usingVariableValues:self.testVariableValues]];
+        id programValue = [CalculatorBrain runProgram:self.brain.program usingVariableValues:self.testVariableValues];
+        if ([programValue isKindOfClass: [NSNumber class]]) {
+           self.display.text = [NSString stringWithFormat:@"%@", [programValue stringValue]];
+        } else if ([programValue isKindOfClass:[NSString class]]) {
+            self.display.text = programValue;
+        } else { // default case means stack is empty
+            self.display.text = @"0";
+        }
     }
     self.fullOperationDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
     self.variablesDisplay.text = [self variablesString];
@@ -130,7 +137,7 @@
 
 - (IBAction)clearDisplay {
     [self.brain clearCalculator];
-    [self updateDisplays:nil];
+    [self updateDisplays:@"0"];
     self.userIsInTheMiddleOfEnteringANumber = NO;
 }
 
