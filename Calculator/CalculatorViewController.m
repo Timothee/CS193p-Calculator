@@ -35,7 +35,7 @@
 
 - (NSMutableDictionary *) testVariableValues {
     if (!_testVariableValues) {
-        _testVariableValues = [[NSMutableDictionary alloc] initWithObjectsAndKeys: @"1", @"a", @"2", @"b", @"3", @"x", nil];
+        _testVariableValues = [[NSMutableDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithFloat:1.0], @"a", [NSNumber numberWithFloat:2.0], @"b", [NSNumber numberWithFloat:3.0], @"x", nil];
     }
     return _testVariableValues;
 }
@@ -143,11 +143,11 @@
 
 - (IBAction)setVariableValues:(UIButton *)sender {
     if ([sender.currentTitle isEqualToString:@"Test 1"]) {
-        self.testVariableValues = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"1", @"a", @"2", @"b", @"3", @"x", nil ];
+        self.testVariableValues = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:1.0], @"a", [NSNumber numberWithFloat:2.0], @"b", [NSNumber numberWithFloat:3.0], @"x", nil ];
     } else if ([sender.currentTitle isEqualToString:@"Test 2"]) {
-        self.testVariableValues = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"0", @"a", @"-5", @"b", @"0.5", @"x", nil ];
+        self.testVariableValues = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:0.0], @"a", [NSNumber numberWithFloat:-5.0], @"b", [NSNumber numberWithFloat:0.5], @"x", nil ];
     } else if ([sender.currentTitle isEqualToString:@"Test 3"]) {
-        self.testVariableValues = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"1", @"a", @"2", @"b", @"3", @"x", nil ];
+        self.testVariableValues = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:1.0], @"a", [NSNumber numberWithFloat:2.0], @"b", [NSNumber numberWithFloat:3.0], @"x", nil ];
     } else if ([sender.currentTitle isEqualToString:@"Test 4"]) {
         self.testVariableValues = nil;
     }

@@ -207,8 +207,7 @@ NSSet *validOperations, *twoOperandOperations, *oneOperandOperations, *noOperand
         for (int i = 0; i < [stack count]; i++) {
             id topOfStack = [stack objectAtIndex:i];
             if ([self isVariable:topOfStack]) {
-                NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-                [stack replaceObjectAtIndex:i withObject:[formatter numberFromString:[variableValues objectForKey:topOfStack]]];
+                [stack replaceObjectAtIndex:i withObject:[variableValues objectForKey:topOfStack]];
             }
         }
     }
