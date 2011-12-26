@@ -8,6 +8,7 @@
 
 #import "CalculatorViewController.h"
 #import "CalculatorBrain.h"
+#import "GraphViewController.h"
 
 @interface CalculatorViewController()
 @property (nonatomic) BOOL userIsInTheMiddleOfEnteringANumber;
@@ -25,6 +26,14 @@
 @synthesize userIsInTheMiddleOfEnteringANumber = _userIsInTheMiddleOfEnteringANumber;
 @synthesize brain = _brain;
 @synthesize testVariableValues = _testVariableValues;
+
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"graphFunction"]) {
+        GraphViewController *newController = segue.destinationViewController;
+        newController.program = [self.brain.program copy];
+    }
+}
 
 -(CalculatorBrain *) brain {
     if (!_brain) {

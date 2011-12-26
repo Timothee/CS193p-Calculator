@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B4BF1EF14A3C35400AEC565 /* AxesDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4BF1EE14A3C35400AEC565 /* AxesDrawer.m */; };
+		3B4BF1F414A3C38C00AEC565 /* GraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4BF1F214A3C38C00AEC565 /* GraphViewController.m */; };
+		3B4BF1F814A3E6D900AEC565 /* GraphingCalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4BF1F714A3E6D900AEC565 /* GraphingCalculatorView.m */; };
 		3B84CE84148704A700FAF49C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B84CE83148704A700FAF49C /* UIKit.framework */; };
 		3B84CE86148704A700FAF49C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B84CE85148704A700FAF49C /* Foundation.framework */; };
 		3B84CE88148704A700FAF49C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B84CE87148704A700FAF49C /* CoreGraphics.framework */; };
@@ -19,6 +22,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B4BF1ED14A3C35400AEC565 /* AxesDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AxesDrawer.h; sourceTree = "<group>"; };
+		3B4BF1EE14A3C35400AEC565 /* AxesDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxesDrawer.m; sourceTree = "<group>"; };
+		3B4BF1F114A3C38C00AEC565 /* GraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphViewController.h; sourceTree = "<group>"; };
+		3B4BF1F214A3C38C00AEC565 /* GraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
+		3B4BF1F614A3E6D900AEC565 /* GraphingCalculatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphingCalculatorView.h; sourceTree = "<group>"; };
+		3B4BF1F714A3E6D900AEC565 /* GraphingCalculatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphingCalculatorView.m; sourceTree = "<group>"; };
 		3B84CE7F148704A700FAF49C /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B84CE83148704A700FAF49C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3B84CE85148704A700FAF49C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -87,6 +96,12 @@
 				3B84CEA11488514100FAF49C /* CalculatorBrain.m */,
 				3B84CE98148704A700FAF49C /* CalculatorViewController.h */,
 				3B84CE99148704A700FAF49C /* CalculatorViewController.m */,
+				3B4BF1F114A3C38C00AEC565 /* GraphViewController.h */,
+				3B4BF1F214A3C38C00AEC565 /* GraphViewController.m */,
+				3B4BF1F614A3E6D900AEC565 /* GraphingCalculatorView.h */,
+				3B4BF1F714A3E6D900AEC565 /* GraphingCalculatorView.m */,
+				3B4BF1ED14A3C35400AEC565 /* AxesDrawer.h */,
+				3B4BF1EE14A3C35400AEC565 /* AxesDrawer.m */,
 				3B84CE8A148704A700FAF49C /* Supporting Files */,
 			);
 			path = Calculator;
@@ -169,6 +184,9 @@
 				3B84CE94148704A700FAF49C /* CalculatorAppDelegate.m in Sources */,
 				3B84CE9A148704A700FAF49C /* CalculatorViewController.m in Sources */,
 				3B84CEA21488514100FAF49C /* CalculatorBrain.m in Sources */,
+				3B4BF1EF14A3C35400AEC565 /* AxesDrawer.m in Sources */,
+				3B4BF1F414A3C38C00AEC565 /* GraphViewController.m in Sources */,
+				3B4BF1F814A3E6D900AEC565 /* GraphingCalculatorView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,7 +263,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Calculator/Calculator-Prefix.pch";
 				INFOPLIST_FILE = "Calculator/Calculator-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -256,7 +276,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Calculator/Calculator-Prefix.pch";
 				INFOPLIST_FILE = "Calculator/Calculator-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -280,6 +302,7 @@
 				3B84CE9F148704A700FAF49C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
