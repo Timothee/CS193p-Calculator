@@ -22,7 +22,7 @@
 
 -(float)scale {
     if (!_scale) {
-        _scale = 1.0;
+        _scale = 10.0;
     }
     return _scale;
 }
@@ -100,6 +100,8 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     [AxesDrawer drawAxesInRect:rect originAtPoint:self.origin scale:self.scale];
     
+    CGFloat screenDensity = [self contentScaleFactor]; // for retina displays
+
     // (x, y) coordinates in pixels in view. 0 < x, y < 320|480
     // (X, Y) coordinates in graph view
     // X = (x - self.origin.x)/self.scale
@@ -108,10 +110,9 @@
     Y = [self.dataSource yForXValue:-self.origin.x/self.scale forGraphingView:self];
     CGContextMoveToPoint(context, 0, self.origin.y-Y*self.scale);
 
-    for (int x = 1; x < rect.size.width; x++) {
-        Y = [self.dataSource yForXValue:(x-self.origin.x)/self.scale forGraphingView:self];
-        NSLog(@"lastY for x=%d: %g", x, Y);
-        CGContextAddLineToPoint(context, x, self.origin.y-Y*self.scale);
+    for (int x = 1; x < rect.size.width*screenDensity; x++) {
+        Y = [self.dataSource yForXValue:(x/screenDensity-self.origin.x)/self.scale forGraphingView:self];
+        CGContextAddLineToPoint(context, x/screenDensity, self.origin.y-Y*self.scale);
     }
     
     [[UIColor blueColor] setStroke];
