@@ -74,6 +74,36 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+
+#pragma mark - UISplitViewControllerDelegate implementation
+
+-(BOOL)splitViewController:(UISplitViewController *)svc
+  shouldHideViewController:(UIViewController *)vc
+             inOrientation:(UIInterfaceOrientation)orientation {
+    return UIInterfaceOrientationIsPortrait(orientation);
+}
+
+-(void)splitViewController:(UISplitViewController *)svc
+    willHideViewController:(UIViewController *)aViewController
+         withBarButtonItem:(UIBarButtonItem *)barButtonItem
+      forPopoverController:(UIPopoverController *)pc
+{
+    barButtonItem.title = @"Calculator";
+    NSMutableArray *toolbarItems = [self.toolbar.items mutableCopy];
+    [toolbarItems insertObject:barButtonItem atIndex:0];
+    self.toolbar.items = toolbarItems;
+}
+
+-(void)splitViewController:(UISplitViewController *)svc
+    willShowViewController:(UIViewController *)aViewController
+ invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+{
+    NSMutableArray *toolbarItems = [self.toolbar.items mutableCopy];
+    [toolbarItems removeObject:barButtonItem];
+    self.toolbar.items = toolbarItems;
+}
+
+
 #pragma mark - GraphViewDelegate protocol implementation
 -(double)yForXValue:(double)x forGraphingView:(GraphingCalculatorView *)sender {
     id y = [CalculatorBrain runProgram:self.program usingVariableValues:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:x], @"x", nil]];
@@ -87,6 +117,12 @@
 
 
 #pragma mark - View lifecycle
+
+-(void)awakeFromNib {
+    [super awakeFromNib];
+    self.splitViewController.delegate = self;
+
+}
 
 - (void)viewDidLoad
 {

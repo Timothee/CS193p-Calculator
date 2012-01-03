@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GraphingCalculatorView.h"
 
-@interface GraphViewController : UIViewController
+@interface GraphViewController : UIViewController <UISplitViewControllerDelegate>
 
 @property (nonatomic, strong) NSArray *program;
 @property (nonatomic, weak) IBOutlet UILabel *functionDisplay;

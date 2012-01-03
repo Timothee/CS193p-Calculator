@@ -191,42 +191,10 @@
     }
 }
 
-
-#pragma mark - UISplitViewControllerDelegate implementation
-
--(BOOL)splitViewController:(UISplitViewController *)svc
-  shouldHideViewController:(UIViewController *)vc
-             inOrientation:(UIInterfaceOrientation)orientation {
-    return UIInterfaceOrientationIsPortrait(orientation);
-}
-
--(void)splitViewController:(UISplitViewController *)svc
-    willHideViewController:(UIViewController *)aViewController
-         withBarButtonItem:(UIBarButtonItem *)barButtonItem
-      forPopoverController:(UIPopoverController *)pc
-{
-    barButtonItem.title = @"Calculator";
-    GraphViewController *gvc = [self splitViewGraphViewController];
-    NSMutableArray *toolbarItems = [gvc.toolbar.items mutableCopy];
-    [toolbarItems insertObject:barButtonItem atIndex:0];
-    gvc.toolbar.items = toolbarItems;
-}
-
--(void)splitViewController:(UISplitViewController *)svc
-    willShowViewController:(UIViewController *)aViewController
- invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
-{
-    GraphViewController *gvc = [self splitViewGraphViewController];
-    NSMutableArray *toolbarItems = [gvc.toolbar.items mutableCopy];
-    [toolbarItems removeObject:barButtonItem];
-    gvc.toolbar.items = toolbarItems;
-}
-
 #pragma mark -
 
 -(void)awakeFromNib {
     [super awakeFromNib];
-    self.splitViewController.delegate = self;
 }
 
 - (void)viewDidUnload {
