@@ -12,5 +12,7 @@
 @interface GraphViewController : UIViewController
 
 @property (nonatomic, strong) NSArray *program;
-@property (weak, nonatomic) IBOutlet UILabel *functionDisplay;
+@property (nonatomic, weak) IBOutlet UILabel *functionDisplay;
+@property (nonatomic, weak) IBOutlet UIToolbar *toolbar;
+
 @end

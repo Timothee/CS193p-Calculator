@@ -14,18 +14,45 @@
 @end
 
 @implementation GraphViewController
+
 @synthesize functionDisplay = _functionDisplay;
 @synthesize program = _program;
 @synthesize graphView = _graphView;
+@synthesize toolbar = _toolbar;
 
+
+-(void)setFunctionDisplayText {
+    self.functionDisplay.text = [NSString stringWithFormat:@"y = %@", [CalculatorBrain descriptionOfProgram:self.program]];
+}
+
+-(void)setProgram:(NSArray *)program {
+    if (![program isEqualToArray:_program]) {
+        _program = program;
+        [self setFunctionDisplayText];
+        [self.graphView setNeedsDisplay];
+    }
+}
 
 -(void)setGraphView:(GraphingCalculatorView *)graphView {
     _graphView = graphView;
+    
     [self.graphView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self.graphView action:@selector(pinch:)]];
     [self.graphView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self.graphView action:@selector(pan:)]];
-    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self.graphView action:@selector(moveOriginToTripleTapLocation:)];
-    [tapGR setNumberOfTapsRequired:3];
-    [self.graphView addGestureRecognizer:tapGR];
+    
+    UITapGestureRecognizer *moveOriginGR = [[UITapGestureRecognizer alloc] initWithTarget:self.graphView action:@selector(moveOriginToTripleTapLocation:)];
+    [moveOriginGR setNumberOfTapsRequired:3];
+    [self.graphView addGestureRecognizer:moveOriginGR];
+    
+    UITapGestureRecognizer *zoomInGR = [[UITapGestureRecognizer alloc] initWithTarget:self.graphView action:@selector(zoomIn:)];
+    [zoomInGR setNumberOfTapsRequired:2];
+    [zoomInGR requireGestureRecognizerToFail:moveOriginGR];
+    [self.graphView addGestureRecognizer:zoomInGR];
+    
+    UITapGestureRecognizer *zoomOutGR = [[UITapGestureRecognizer alloc] initWithTarget:self.graphView action:@selector(zoomOut:)];
+    [zoomOutGR setNumberOfTapsRequired:1];
+    [zoomOutGR setNumberOfTouchesRequired:2];
+    [self.graphView addGestureRecognizer:zoomOutGR];
+    
     self.graphView.dataSource = self;
 }
 
@@ -64,15 +91,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.functionDisplay.text = [NSString stringWithFormat:@"f(x) = %@", [CalculatorBrain descriptionOfProgram:self.program]];
+    [self setFunctionDisplayText];
 }
 
 - (void)viewDidUnload
 {
     [self setFunctionDisplay:nil];
+    [self setProgram:nil];
+    [self setGraphView:nil];
+    [self setToolbar:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -80,4 +108,27 @@
     return YES;
 }
 
+-(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    if (self.splitViewController) {
+        if (UIInterfaceOrientationIsPortrait(toInterfaceOrientation)) {
+            self.toolbar.hidden = NO;
+        } else {
+            self.toolbar.hidden = YES;
+        }
+    }
+}
+
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    if (self.splitViewController) {
+        // Resizes the graphView after removing/adding the toolbar.
+        if (UIInterfaceOrientationIsPortrait(fromInterfaceOrientation)) {
+            self.graphView.bounds = self.view.bounds;
+            self.graphView.frame = self.view.bounds;
+        } else {
+            int toolbarHeight = self.toolbar.bounds.size.height;
+            CGRect viewBounds = self.view.bounds;
+            self.graphView.frame = CGRectMake(0, toolbarHeight, viewBounds.size.width, viewBounds.size.height - toolbarHeight);
+        }
+    }
+}
 @end

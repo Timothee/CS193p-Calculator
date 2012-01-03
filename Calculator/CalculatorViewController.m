@@ -176,11 +176,67 @@
     }
 }
 
+// Gets GraphViewController if any, that is, if in a split view.
+- (GraphViewController *)splitViewGraphViewController {
+    id gvc = [self.splitViewController.viewControllers lastObject];
+    if (![gvc isKindOfClass:[GraphViewController class]]) {
+        gvc = nil;
+    }
+    return gvc;
+}
 
+- (IBAction)updateGraphView {
+    if ([self splitViewGraphViewController]) {
+        [self splitViewGraphViewController].program = [self.brain.program copy];
+    }
+}
+
+
+#pragma mark - UISplitViewControllerDelegate implementation
+
+-(BOOL)splitViewController:(UISplitViewController *)svc
+  shouldHideViewController:(UIViewController *)vc
+             inOrientation:(UIInterfaceOrientation)orientation {
+    return UIInterfaceOrientationIsPortrait(orientation);
+}
+
+-(void)splitViewController:(UISplitViewController *)svc
+    willHideViewController:(UIViewController *)aViewController
+         withBarButtonItem:(UIBarButtonItem *)barButtonItem
+      forPopoverController:(UIPopoverController *)pc
+{
+    barButtonItem.title = @"Calculator";
+    GraphViewController *gvc = [self splitViewGraphViewController];
+    NSMutableArray *toolbarItems = [gvc.toolbar.items mutableCopy];
+    [toolbarItems insertObject:barButtonItem atIndex:0];
+    gvc.toolbar.items = toolbarItems;
+}
+
+-(void)splitViewController:(UISplitViewController *)svc
+    willShowViewController:(UIViewController *)aViewController
+ invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+{
+    GraphViewController *gvc = [self splitViewGraphViewController];
+    NSMutableArray *toolbarItems = [gvc.toolbar.items mutableCopy];
+    [toolbarItems removeObject:barButtonItem];
+    gvc.toolbar.items = toolbarItems;
+}
+
+#pragma mark -
+
+-(void)awakeFromNib {
+    [super awakeFromNib];
+    self.splitViewController.delegate = self;
+}
 
 - (void)viewDidUnload {
     [self setFullOperationDisplay:nil];
     [self setVariablesDisplay:nil];
     [super viewDidUnload];
 }
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return YES;
+}
+
 @end

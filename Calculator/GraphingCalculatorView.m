@@ -22,7 +22,10 @@
 
 -(float)scale {
     if (!_scale) {
-        _scale = 10.0;
+        _scale = [[NSUserDefaults standardUserDefaults] floatForKey:@"GraphingCalculatorView.scale"];
+        if (!_scale) {
+            _scale = 10.0;
+        }
     }
     return _scale;
 }
@@ -30,13 +33,20 @@
 -(void)setScale:(float)scale {
     if (_scale != scale) {
         _scale = scale;
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        [prefs setFloat:_scale forKey:@"GraphingCalculatorView.scale"];
+        [prefs synchronize];
         [self setNeedsDisplay];
     }
 }
 
 -(CGPoint)origin {
     if (CGPointEqualToPoint(_origin, CGPointZero)) {
-        _origin = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
+        _origin.x = [[NSUserDefaults standardUserDefaults] floatForKey:@"GraphingCalculatorView.origin.x"];
+        _origin.y = [[NSUserDefaults standardUserDefaults] floatForKey:@"GraphingCalculatorView.origin.y"];
+        if (CGPointEqualToPoint(_origin, CGPointZero)) {
+            _origin = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
+        }
     }
     return _origin;
 }
@@ -44,6 +54,10 @@
 -(void)setOrigin:(CGPoint)origin {
     if (!CGPointEqualToPoint(origin, _origin)) {
         _origin = origin;
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        [prefs setFloat:_origin.x forKey:@"GraphingCalculatorView.origin.x"];
+        [prefs setFloat:_origin.y forKey:@"GraphingCalculatorView.origin.y"];
+        [prefs synchronize];
         [self setNeedsDisplay];
     }
 }
@@ -71,6 +85,18 @@
 -(void)moveOriginToTripleTapLocation:(UITapGestureRecognizer *)gesture {
     if (gesture.state == UIGestureRecognizerStateEnded) {
         self.origin = [gesture locationInView:self];
+    }
+}
+
+-(void)zoomIn:(UITapGestureRecognizer *)gesture {
+    if (gesture.state == UIGestureRecognizerStateEnded) {
+        self.scale *= 2.0;
+    }
+}
+
+-(void)zoomOut:(UITapGestureRecognizer *)gesture {
+    if (gesture.state == UIGestureRecognizerStateEnded) {
+        self.scale *= 0.5;
     }
 }
 

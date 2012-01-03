@@ -14,9 +14,15 @@
 -(double) yForXValue:(double)x forGraphingView:(GraphingCalculatorView *)sender;
 @end
 
+
+
 @interface GraphingCalculatorView : UIView
+
 @property (nonatomic, weak) IBOutlet id <GraphingViewDataSource> dataSource;
+
 -(void)pinch:(UIPinchGestureRecognizer *)gesture;
 -(void)pan:(UIPanGestureRecognizer *)gesture;
 -(void)moveOriginToTripleTapLocation:(UITapGestureRecognizer *)gesture;
+-(void)zoomIn:(UITapGestureRecognizer *)gesture;
+-(void)zoomOut:(UITapGestureRecognizer *)gesture;
 @end
