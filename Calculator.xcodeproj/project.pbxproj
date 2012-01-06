@@ -10,7 +10,8 @@
 		3B4BF1EF14A3C35400AEC565 /* AxesDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4BF1EE14A3C35400AEC565 /* AxesDrawer.m */; };
 		3B4BF1F414A3C38C00AEC565 /* GraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4BF1F214A3C38C00AEC565 /* GraphViewController.m */; };
 		3B4BF1F814A3E6D900AEC565 /* GraphingCalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4BF1F714A3E6D900AEC565 /* GraphingCalculatorView.m */; };
-		3B5857C414ABC8BB00A1EE81 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B5857C314ABC8BB00A1EE81 /* iPad.storyboard */; };
+		3B681D3F14B7B5E0006DB563 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B681D3E14B7B5E0006DB563 /* iPad.storyboard */; };
+		3B681D4314B7B92E006DB563 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3B681D4214B7B92E006DB563 /* README.md */; };
 		3B84CE84148704A700FAF49C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B84CE83148704A700FAF49C /* UIKit.framework */; };
 		3B84CE86148704A700FAF49C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B84CE85148704A700FAF49C /* Foundation.framework */; };
 		3B84CE88148704A700FAF49C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B84CE87148704A700FAF49C /* CoreGraphics.framework */; };
@@ -29,7 +30,8 @@
 		3B4BF1F214A3C38C00AEC565 /* GraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
 		3B4BF1F614A3E6D900AEC565 /* GraphingCalculatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphingCalculatorView.h; sourceTree = "<group>"; };
 		3B4BF1F714A3E6D900AEC565 /* GraphingCalculatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphingCalculatorView.m; sourceTree = "<group>"; };
-		3B5857C314ABC8BB00A1EE81 /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = iPad.storyboard; path = ../iPad.storyboard; sourceTree = "<group>"; };
+		3B681D3E14B7B5E0006DB563 /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
+		3B681D4214B7B92E006DB563 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		3B84CE7F148704A700FAF49C /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B84CE83148704A700FAF49C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3B84CE85148704A700FAF49C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -103,9 +105,10 @@
 				3B4BF1F714A3E6D900AEC565 /* GraphingCalculatorView.m */,
 				3B4BF1ED14A3C35400AEC565 /* AxesDrawer.h */,
 				3B4BF1EE14A3C35400AEC565 /* AxesDrawer.m */,
-				3B5857C314ABC8BB00A1EE81 /* iPad.storyboard */,
+				3B681D3E14B7B5E0006DB563 /* iPad.storyboard */,
 				3B84CE95148704A700FAF49C /* iPhone.storyboard */,
 				3B84CE8A148704A700FAF49C /* Supporting Files */,
+				3B681D4214B7B92E006DB563 /* README.md */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -173,7 +176,8 @@
 			files = (
 				3B84CE8E148704A700FAF49C /* InfoPlist.strings in Resources */,
 				3B84CE97148704A700FAF49C /* iPhone.storyboard in Resources */,
-				3B5857C414ABC8BB00A1EE81 /* iPad.storyboard in Resources */,
+				3B681D3F14B7B5E0006DB563 /* iPad.storyboard in Resources */,
+				3B681D4314B7B92E006DB563 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
