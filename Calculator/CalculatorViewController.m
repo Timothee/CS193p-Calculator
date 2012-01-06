@@ -29,7 +29,8 @@
 
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"graphFunction"]) {
+    if ([segue.identifier isEqualToString:@"graphFunction.portrait"] ||
+        [segue.identifier isEqualToString:@"graphFunction.landscape"]) {
         GraphViewController *newController = segue.destinationViewController;
         newController.program = [self.brain.program copy];
     }
