@@ -19,6 +19,7 @@
 @interface GraphingCalculatorView : UIView
 
 @property (nonatomic, weak) IBOutlet id <GraphingViewDataSource> dataSource;
+@property (nonatomic, strong) NSString *graphMode;
 
 -(void)pinch:(UIPinchGestureRecognizer *)gesture;
 -(void)pan:(UIPanGestureRecognizer *)gesture;

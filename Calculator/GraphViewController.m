@@ -56,6 +56,13 @@
     self.graphView.dataSource = self;
 }
 
+-(IBAction)switchGraphMode {
+    if ([self.graphView.graphMode isEqualToString:@"line"]) {
+        self.graphView.graphMode = @"point";
+    } else {
+        self.graphView.graphMode = @"line";
+    }
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

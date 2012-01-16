@@ -19,6 +19,7 @@
 @synthesize dataSource = _dataSource;
 @synthesize scale = _scale;
 @synthesize origin = _origin;
+@synthesize graphMode = _graphMode;
 
 -(float)scale {
     if (!_scale) {
@@ -60,6 +61,18 @@
         [prefs synchronize];
         [self setNeedsDisplay];
     }
+}
+
+-(NSString *)graphMode {
+    if (!_graphMode) {
+        _graphMode = @"line";
+    }
+    return _graphMode;
+}
+
+-(void)setGraphMode:(NSString *)graphMode {
+    _graphMode = graphMode;
+    [self setNeedsDisplay];
 }
 
 
@@ -133,12 +146,24 @@
     // X = (x - self.origin.x)/self.scale
     // Y = (self.origin.y - y)/self.scale -> Y goes up from bottom to top, y goes up from top to bottom
     double Y;
-
-    [[UIColor blueColor] setFill];
-    for (int x = 1; x < rect.size.width*screenDensity; x++) {
-        Y = [self.dataSource yForXValue:(x/screenDensity-self.origin.x)/self.scale forGraphingView:self];
-        CGContextFillRect(context, CGRectMake((x-0.5)/screenDensity, self.origin.y-Y*self.scale-0.5/screenDensity, 1.0/screenDensity, 1.0/screenDensity));
+    
+    if ([self.graphMode isEqualToString:@"line"]) {
+        Y = [self.dataSource yForXValue:-self.origin.x/self.scale forGraphingView:self];
+        CGContextMoveToPoint(context, 0, self.origin.y-Y*self.scale);
+        for (int x = 1; x < rect.size.width*screenDensity; x++) {
+            Y = [self.dataSource yForXValue:(x/screenDensity-self.origin.x)/self.scale forGraphingView:self];
+            CGContextAddLineToPoint(context, x/screenDensity, self.origin.y-Y*self.scale);
+        }
+        [[UIColor blueColor] setStroke];
+        CGContextDrawPath(context, kCGPathStroke);
+    } else {
+        [[UIColor blueColor] setFill];
+        for (int x = 1; x < rect.size.width*screenDensity; x++) {
+            Y = [self.dataSource yForXValue:(x/screenDensity-self.origin.x)/self.scale forGraphingView:self];
+            CGContextFillRect(context, CGRectMake((x-0.5)/screenDensity, self.origin.y-Y*self.scale-0.5/screenDensity, 1.0/screenDensity, 1.0/screenDensity));
+        }
     }
+
 }
 
 @end

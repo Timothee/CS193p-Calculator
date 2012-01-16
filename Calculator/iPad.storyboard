@@ -30,6 +30,20 @@
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Line graph mode:" lineBreakMode="tailTruncation" minimumFontSize="10" id="Y2K-b0-AR3">
+                                <rect key="frame" x="467" y="701" width="134" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="axC-fP-Gnp">
+                                <rect key="frame" x="604" y="698" width="79" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <action selector="switchGraphMode" destination="Xr3-cE-W5f" eventType="valueChanged" id="hDC-iz-A5B"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -44,7 +58,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-213" y="-215"/>
+            <point key="canvasLocation" x="-255" y="-353"/>
         </scene>
         <scene sceneID="pw5-ev-cN5">
             <objects>
