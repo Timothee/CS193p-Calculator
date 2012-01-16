@@ -133,17 +133,12 @@
     // X = (x - self.origin.x)/self.scale
     // Y = (self.origin.y - y)/self.scale -> Y goes up from bottom to top, y goes up from top to bottom
     double Y;
-    Y = [self.dataSource yForXValue:-self.origin.x/self.scale forGraphingView:self];
-    CGContextMoveToPoint(context, 0, self.origin.y-Y*self.scale);
 
+    [[UIColor blueColor] setFill];
     for (int x = 1; x < rect.size.width*screenDensity; x++) {
         Y = [self.dataSource yForXValue:(x/screenDensity-self.origin.x)/self.scale forGraphingView:self];
-        CGContextAddLineToPoint(context, x/screenDensity, self.origin.y-Y*self.scale);
+        CGContextFillRect(context, CGRectMake((x-0.5)/screenDensity, self.origin.y-Y*self.scale-0.5/screenDensity, 1.0/screenDensity, 1.0/screenDensity));
     }
-    
-    [[UIColor blueColor] setStroke];
-    CGContextDrawPath(context, kCGPathStroke);
-    
 }
 
 @end
