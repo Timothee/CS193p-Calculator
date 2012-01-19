@@ -41,6 +41,12 @@
     }
 }
 
+-(void)setScaleAndOriginWithScaleRatio:(float)scaleRatio andPivotPoint:(CGPoint)tapLocation {
+    self.origin = CGPointMake(tapLocation.x - scaleRatio*(tapLocation.x - self.origin.x),
+                              tapLocation.y - scaleRatio*(tapLocation.y - self.origin.y));
+    self.scale *= scaleRatio;
+}
+
 -(CGPoint)origin {
     if (CGPointEqualToPoint(_origin, CGPointZero)) {
         _origin.x = [[NSUserDefaults standardUserDefaults] floatForKey:@"GraphingCalculatorView.origin.x"];
@@ -81,7 +87,7 @@
 -(void)pinch:(UIPinchGestureRecognizer *)gesture {
     if ((gesture.state == UIGestureRecognizerStateChanged) ||
         (gesture.state == UIGestureRecognizerStateEnded)) {
-        self.scale *= gesture.scale;
+        [self setScaleAndOriginWithScaleRatio:gesture.scale andPivotPoint:[gesture locationInView:self]];
         gesture.scale = 1;
     }
 }
@@ -103,13 +109,13 @@
 
 -(void)zoomIn:(UITapGestureRecognizer *)gesture {
     if (gesture.state == UIGestureRecognizerStateEnded) {
-        self.scale *= 2.0;
+        [self setScaleAndOriginWithScaleRatio:2.0 andPivotPoint:[gesture locationInView:self]];
     }
 }
 
 -(void)zoomOut:(UITapGestureRecognizer *)gesture {
     if (gesture.state == UIGestureRecognizerStateEnded) {
-        self.scale *= 0.5;
+        [self setScaleAndOriginWithScaleRatio:0.5 andPivotPoint:[gesture locationInView:self]];
     }
 }
 
