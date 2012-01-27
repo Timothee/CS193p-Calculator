@@ -151,27 +151,4 @@
     return YES;
 }
 
--(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-    if (self.splitViewController) {
-        if (UIInterfaceOrientationIsPortrait(toInterfaceOrientation)) {
-            self.toolbar.hidden = NO;
-        } else {
-            self.toolbar.hidden = YES;
-        }
-    }
-}
-
--(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    if (self.splitViewController) {
-        // Resizes the graphView after removing/adding the toolbar.
-        if (UIInterfaceOrientationIsPortrait(fromInterfaceOrientation)) {
-            self.graphView.bounds = self.view.bounds;
-            self.graphView.frame = self.view.bounds;
-        } else {
-            int toolbarHeight = self.toolbar.bounds.size.height;
-            CGRect viewBounds = self.view.bounds;
-            self.graphView.frame = CGRectMake(0, toolbarHeight, viewBounds.size.width, viewBounds.size.height - toolbarHeight);
-        }
-    }
-}
 @end

@@ -196,6 +196,7 @@
 
 -(void)awakeFromNib {
     [super awakeFromNib];
+    self.title = @"Calculator";
 }
 
 - (void)viewDidUnload {

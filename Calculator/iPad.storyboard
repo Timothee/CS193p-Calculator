@@ -68,7 +68,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <segue destination="Xr3-cE-W5f" kind="relationship" relationship="detailViewController" id="mH3-w9-xkv"/>
-                        <segue destination="B79-KC-Ct7" kind="relationship" relationship="masterViewController" id="QCL-R8-RQU"/>
+                        <segue destination="1Iw-yZ-VeT" kind="relationship" relationship="masterViewController" id="QCL-R8-RQU"/>
                     </connections>
                 </splitViewController>
             </objects>
@@ -484,33 +484,26 @@
                     </connections>
                 </viewController>
             </objects>
+            <point key="canvasLocation" x="344" y="-1383"/>
+        </scene>
+        <scene sceneID="Wsu-cv-fMP">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JuI-E7-QGJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="1Iw-yZ-VeT" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="NMi-OD-WeK">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="B79-KC-Ct7" kind="relationship" relationship="rootViewController" id="evH-Wb-1s2"/>
+                    </connections>
+                </navigationController>
+            </objects>
             <point key="canvasLocation" x="-182" y="-1383"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="CalculatorViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CalculatorViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="display" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="fullOperationDisplay" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="variablesDisplay" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="GraphViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GraphViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="functionDisplay" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="graphView" candidateClass="GraphingCalculatorView"/>
-                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
-            </relationships>
-        </class>
-        <class className="GraphingCalculatorView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GraphingCalculatorView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="dataSource"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
