@@ -43,7 +43,7 @@
     return _brain;
 }
 
-- (NSMutableDictionary *) testVariableValues {
+-(NSMutableDictionary *) testVariableValues {
     if (!_testVariableValues) {
         _testVariableValues = [[NSMutableDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithFloat:1.0], @"a", [NSNumber numberWithFloat:2.0], @"b", [NSNumber numberWithFloat:3.0], @"x", nil];
     }

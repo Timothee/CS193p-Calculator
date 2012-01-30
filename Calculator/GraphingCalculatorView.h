@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+#define GRAPH_MODE_LINE @"line"
+#define GRAPH_MODE_POINT @"point"
+
 @class GraphingCalculatorView;
 
 @protocol GraphingViewDataSource

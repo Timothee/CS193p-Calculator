@@ -71,7 +71,7 @@
 
 -(NSString *)graphMode {
     if (!_graphMode) {
-        _graphMode = @"line";
+        _graphMode = GRAPH_MODE_LINE;
     }
     return _graphMode;
 }
@@ -153,7 +153,7 @@
     // Y = (self.origin.y - y)/self.scale -> Y goes up from bottom to top, y goes up from top to bottom
     double Y;
     
-    if ([self.graphMode isEqualToString:@"line"]) {
+    if ([self.graphMode isEqualToString:GRAPH_MODE_LINE]) {
         Y = [self.dataSource yForXValue:-self.origin.x/self.scale forGraphingView:self];
         CGContextMoveToPoint(context, 0, self.origin.y-Y*self.scale);
         for (int x = 1; x < rect.size.width*screenDensity; x++) {

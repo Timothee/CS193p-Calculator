@@ -43,7 +43,7 @@ NSSet *validOperations, *twoOperandOperations, *oneOperandOperations, *noOperand
     return _programStack;
 }
 
--(id) program {
+-(id)program {
     return [self.programStack copy];
 }
 
@@ -81,7 +81,7 @@ NSSet *validOperations, *twoOperandOperations, *oneOperandOperations, *noOperand
     return result;
 }
 
-+ (NSString *)descriptionOfProgram:(id)program {
++(NSString *)descriptionOfProgram:(id)program {
     NSMutableArray *stack;
     NSMutableString *result;
     BOOL firstTimeInLoop = YES;
@@ -102,19 +102,18 @@ NSSet *validOperations, *twoOperandOperations, *oneOperandOperations, *noOperand
 }
 
 
--(void) pushOperand:(double)operand {
+-(void)pushOperand:(double)operand {
     [self.programStack addObject:[NSNumber numberWithDouble:operand]];
 }
 
--(void) pushVariable:(NSString *)variable {
+-(void)pushVariable:(NSString *)variable {
     if ([CalculatorBrain isVariable:variable]) {
         [self.programStack addObject:variable];
     }
 }
 
 
-- (id)performOperation:(NSString *)operation
-{
+-(id)performOperation:(NSString *)operation {
     if ([CalculatorBrain isOperation:operation]) {
         [self.programStack addObject:operation];
     }
@@ -122,13 +121,13 @@ NSSet *validOperations, *twoOperandOperations, *oneOperandOperations, *noOperand
 }
 
 
--(double) popOperand {
+-(double)popOperand {
     NSNumber *operandObject = [self.programStack lastObject];
     if (operandObject) [self.programStack removeLastObject];
     return [operandObject doubleValue];
 }
 
-+(id) popOperandOffProgramStack:(NSMutableArray *)stack {
++(id)popOperandOffProgramStack:(NSMutableArray *)stack {
     id result;
     
     id topOfStack = [stack lastObject];
@@ -190,8 +189,7 @@ NSSet *validOperations, *twoOperandOperations, *oneOperandOperations, *noOperand
     return result;
 }
 
-+ (id)runProgram:(id)program
-{
++(id)runProgram:(id)program {
     NSMutableArray *stack;
     if ([program isKindOfClass:[NSArray class]]) {
         stack = [program mutableCopy];
@@ -200,7 +198,7 @@ NSSet *validOperations, *twoOperandOperations, *oneOperandOperations, *noOperand
 }
 
 
-+ (id)runProgram:(id)program usingVariableValues:(NSDictionary *)variableValues {
++(id)runProgram:(id)program usingVariableValues:(NSDictionary *)variableValues {
     NSMutableArray *stack;
     if ([program isKindOfClass:[NSArray class]]) {
         stack = [program mutableCopy];
@@ -216,7 +214,7 @@ NSSet *validOperations, *twoOperandOperations, *oneOperandOperations, *noOperand
 
 
                  
-+ (NSSet *)variablesUsedInProgram:(id)program {
++(NSSet *)variablesUsedInProgram:(id)program {
     NSMutableSet *foundVariables = [[NSMutableSet alloc] init]; // do we need the alloc/init here?
     if ([program isKindOfClass:[NSArray class]]) {
         for (id programElement in program) {
@@ -235,7 +233,7 @@ NSSet *validOperations, *twoOperandOperations, *oneOperandOperations, *noOperand
     [self.programStack removeLastObject];
 }
 
--(void) clearCalculator {
+-(void)clearCalculator {
     [self.programStack removeAllObjects];
 }
 

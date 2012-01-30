@@ -57,10 +57,10 @@
 }
 
 -(IBAction)switchGraphMode {
-    if ([self.graphView.graphMode isEqualToString:@"line"]) {
-        self.graphView.graphMode = @"point";
+    if ([self.graphView.graphMode isEqualToString:GRAPH_MODE_LINE]) {
+        self.graphView.graphMode = GRAPH_MODE_POINT;
     } else {
-        self.graphView.graphMode = @"line";
+        self.graphView.graphMode = GRAPH_MODE_LINE;
     }
 }
 
