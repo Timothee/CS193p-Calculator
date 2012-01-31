@@ -86,6 +86,9 @@ NSSet *validOperations, *twoOperandOperations, *oneOperandOperations, *noOperand
     NSMutableString *result;
     BOOL firstTimeInLoop = YES;
     
+    if (!program || ([program isKindOfClass:[NSArray class]] && ![program count])) {
+        return @"0";
+    }
     if ([program isKindOfClass:[NSArray class]]) {
         stack = [program mutableCopy];
     }
