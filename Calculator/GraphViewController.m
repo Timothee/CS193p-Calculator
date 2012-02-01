@@ -8,9 +8,11 @@
 
 #import "GraphViewController.h"
 #import "CalculatorBrain.h"
+#import "FavoriteTableViewController.h"
 
-@interface GraphViewController() <GraphingViewDataSource>
+@interface GraphViewController() <GraphingViewDataSource, FavoriteTableViewControllerDelegate>
 @property (nonatomic, weak) IBOutlet GraphingCalculatorView *graphView;
+@property (nonatomic, weak) UIPopoverController *favoritesPopoverController;
 @end
 
 @implementation GraphViewController
@@ -19,6 +21,7 @@
 @synthesize program = _program;
 @synthesize graphView = _graphView;
 @synthesize toolbar = _toolbar;
+@synthesize favoritesPopoverController = _favoritesPopoverController;
 
 
 -(void)setFunctionDisplayText {
@@ -56,11 +59,36 @@
     self.graphView.dataSource = self;
 }
 
+#define FAVORITES_KEY @"GraphViewController.Favorites"
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"Show Favorite Graphs"]) {
+        id favoriteTVC = segue.destinationViewController;
+        if ([favoriteTVC isKindOfClass:[FavoriteTableViewController class]]) {
+            [favoriteTVC setFavorites:[[NSUserDefaults standardUserDefaults] objectForKey:FAVORITES_KEY]];
+            [favoriteTVC setDelegate:self];
+            self.favoritesPopoverController = [(UIStoryboardPopoverSegue *)segue popoverController];
+        }
+    }
+}
+
 -(IBAction)switchGraphMode {
     if ([self.graphView.graphMode isEqualToString:GRAPH_MODE_LINE]) {
         self.graphView.graphMode = GRAPH_MODE_POINT;
     } else {
         self.graphView.graphMode = GRAPH_MODE_LINE;
+    }
+}
+
+
+-(IBAction)addToFavorites {
+    if ([self.program count]) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSMutableArray *favorites = [[defaults objectForKey:FAVORITES_KEY] mutableCopy];
+        if (!favorites) favorites = [NSMutableArray array];
+        [favorites addObject:self.program];
+        [defaults setObject:favorites forKey:FAVORITES_KEY];
+        [defaults synchronize];
     }
 }
 
@@ -120,6 +148,12 @@
         
     }
     return [y doubleValue];
+}
+
+#pragma mark - FavoriteTableViewControllerDelegate implementation
+-(void)favoriteTableViewController:(FavoriteTableViewController *)sender didSelectFavoriteProgram:(id)program {
+    self.program = program;
+    [self.favoritesPopoverController dismissPopoverAnimated:YES];
 }
 
 

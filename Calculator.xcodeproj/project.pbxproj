@@ -20,6 +20,7 @@
 		3B84CE97148704A700FAF49C /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B84CE95148704A700FAF49C /* iPhone.storyboard */; };
 		3B84CE9A148704A700FAF49C /* CalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B84CE99148704A700FAF49C /* CalculatorViewController.m */; };
 		3B84CEA21488514100FAF49C /* CalculatorBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B84CEA11488514100FAF49C /* CalculatorBrain.m */; };
+		3B85DA9814D36C1A00E00A16 /* FavoriteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B85DA9714D36C1A00E00A16 /* FavoriteTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,8 @@
 		3B84CE99148704A700FAF49C /* CalculatorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalculatorViewController.m; sourceTree = "<group>"; };
 		3B84CEA01488514100FAF49C /* CalculatorBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorBrain.h; sourceTree = "<group>"; };
 		3B84CEA11488514100FAF49C /* CalculatorBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorBrain.m; sourceTree = "<group>"; };
+		3B85DA9614D36C1900E00A16 /* FavoriteTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteTableViewController.h; sourceTree = "<group>"; };
+		3B85DA9714D36C1A00E00A16 /* FavoriteTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +106,8 @@
 				3B4BF1F714A3E6D900AEC565 /* GraphingCalculatorView.m */,
 				3B4BF1ED14A3C35400AEC565 /* AxesDrawer.h */,
 				3B4BF1EE14A3C35400AEC565 /* AxesDrawer.m */,
+				3B85DA9614D36C1900E00A16 /* FavoriteTableViewController.h */,
+				3B85DA9714D36C1A00E00A16 /* FavoriteTableViewController.m */,
 				3B681D3E14B7B5E0006DB563 /* iPad.storyboard */,
 				3B84CE95148704A700FAF49C /* iPhone.storyboard */,
 				3B84CE8A148704A700FAF49C /* Supporting Files */,
@@ -191,6 +196,7 @@
 				3B4BF1EF14A3C35400AEC565 /* AxesDrawer.m in Sources */,
 				3B4BF1F414A3C38C00AEC565 /* GraphViewController.m in Sources */,
 				3B4BF1F814A3E6D900AEC565 /* GraphingCalculatorView.m in Sources */,
+				3B85DA9814D36C1A00E00A16 /* FavoriteTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
