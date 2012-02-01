@@ -158,6 +158,18 @@
     [self.favoritesPopoverController dismissPopoverAnimated:YES];
 }
 
+-(void)favoriteTableViewController:(FavoriteTableViewController *)sender didDeleteFavoriteProgram:(id)program {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *favorites = [[defaults objectForKey:FAVORITES_KEY] mutableCopy];
+    [favorites removeObject:program];
+    [defaults setObject:favorites forKey:FAVORITES_KEY];
+    [defaults synchronize];
+}
+
+-(NSArray *)favoritesForFavoriteTableViewController:(FavoriteTableViewController *)sender {
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:FAVORITES_KEY] copy];
+}
+
 
 #pragma mark - View lifecycle
 
