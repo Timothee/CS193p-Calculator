@@ -62,12 +62,18 @@
 #define FAVORITES_KEY @"GraphViewController.Favorites"
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"Show Favorite Graphs"]) {
+    if ([segue.identifier isEqualToString:@"Show Favorite Graphs iPad"]) {
         id favoriteTVC = segue.destinationViewController;
         if ([favoriteTVC isKindOfClass:[FavoriteTableViewController class]]) {
             [favoriteTVC setFavorites:[[NSUserDefaults standardUserDefaults] objectForKey:FAVORITES_KEY]];
             [favoriteTVC setDelegate:self];
             self.favoritesPopoverController = [(UIStoryboardPopoverSegue *)segue popoverController];
+        }
+    } else if ([segue.identifier isEqualToString:@"Show Favorite Graphs iPhone"]) {
+        id favoriteTVC = segue.destinationViewController;
+        if ([favoriteTVC isKindOfClass:[FavoriteTableViewController class]]) {
+            [favoriteTVC setFavorites:[[NSUserDefaults standardUserDefaults] objectForKey:FAVORITES_KEY]];
+            [favoriteTVC setDelegate:self];
         }
     }
 }
@@ -155,7 +161,11 @@
 #pragma mark - FavoriteTableViewControllerDelegate implementation
 -(void)favoriteTableViewController:(FavoriteTableViewController *)sender didSelectFavoriteProgram:(id)program {
     self.program = program;
-    [self.favoritesPopoverController dismissPopoverAnimated:YES];
+    if (self.favoritesPopoverController) {
+        [self.favoritesPopoverController dismissPopoverAnimated:YES];
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 -(void)favoriteTableViewController:(FavoriteTableViewController *)sender didDeleteFavoriteProgram:(id)program {
