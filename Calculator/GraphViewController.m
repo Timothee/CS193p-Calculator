@@ -10,7 +10,7 @@
 #import "CalculatorBrain.h"
 #import "FavoriteTableViewController.h"
 
-@interface GraphViewController() <GraphingViewDataSource, FavoriteTableViewControllerDelegate>
+@interface GraphViewController() <GraphingViewDataSource, FavoriteTableViewControllerDelegate, UIPopoverControllerDelegate>
 @property (nonatomic, weak) IBOutlet GraphingCalculatorView *graphView;
 @property (nonatomic, weak) UIPopoverController *favoritesPopoverController;
 @end
@@ -66,6 +66,7 @@
         if ([segue isKindOfClass:[UIStoryboardPopoverSegue class]]) {
             [self.favoritesPopoverController dismissPopoverAnimated:NO];
             self.favoritesPopoverController = [(UIStoryboardPopoverSegue *)segue popoverController];
+            self.favoritesPopoverController.delegate = self;
         }
         id favoriteTVC = segue.destinationViewController;
         if ([favoriteTVC isKindOfClass:[FavoriteTableViewController class]]) {
@@ -175,6 +176,11 @@
 
 -(NSArray *)favoritesForFavoriteTableViewController:(FavoriteTableViewController *)sender {
     return [[[NSUserDefaults standardUserDefaults] objectForKey:FAVORITES_KEY] copy];
+}
+
+#pragma mark - UIPopoverControllerDelegate implementation
+-(void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
+    self.favoritesPopoverController = nil;
 }
 
 
