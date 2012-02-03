@@ -62,14 +62,11 @@
 #define FAVORITES_KEY @"GraphViewController.Favorites"
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"Show Favorite Graphs iPad"]) {
-        id favoriteTVC = segue.destinationViewController;
-        if ([favoriteTVC isKindOfClass:[FavoriteTableViewController class]]) {
-            [favoriteTVC setFavorites:[[NSUserDefaults standardUserDefaults] objectForKey:FAVORITES_KEY]];
-            [favoriteTVC setDelegate:self];
+    if ([segue.identifier isEqualToString:@"Show Favorite Graphs"]) {
+        if ([segue isKindOfClass:[UIStoryboardPopoverSegue class]]) {
+            [self.favoritesPopoverController dismissPopoverAnimated:NO];
             self.favoritesPopoverController = [(UIStoryboardPopoverSegue *)segue popoverController];
         }
-    } else if ([segue.identifier isEqualToString:@"Show Favorite Graphs iPhone"]) {
         id favoriteTVC = segue.destinationViewController;
         if ([favoriteTVC isKindOfClass:[FavoriteTableViewController class]]) {
             [favoriteTVC setFavorites:[[NSUserDefaults standardUserDefaults] objectForKey:FAVORITES_KEY]];
@@ -161,11 +158,11 @@
 #pragma mark - FavoriteTableViewControllerDelegate implementation
 -(void)favoriteTableViewController:(FavoriteTableViewController *)sender didSelectFavoriteProgram:(id)program {
     self.program = program;
-    if (self.favoritesPopoverController) {
-        [self.favoritesPopoverController dismissPopoverAnimated:YES];
-    } else {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+    // next two lines rely on the fact that self.favoritesPopoverController is nil if on iPhone
+    // and navigationController is nil if on iPad.
+    // That works, but is it really proper and clean?
+    [self.favoritesPopoverController dismissPopoverAnimated:YES]; // for iPad version
+    [self.navigationController popViewControllerAnimated:YES]; // for iPhone version
 }
 
 -(void)favoriteTableViewController:(FavoriteTableViewController *)sender didDeleteFavoriteProgram:(id)program {

@@ -30,7 +30,7 @@
                                     </barButtonItem>
                                     <barButtonItem title="Favorites" id="iKq-XW-nbq">
                                         <connections>
-                                            <segue destination="c4Q-Hi-JDp" kind="popover" identifier="Show Favorite Graphs iPad" popoverAnchorBarButtonItem="iKq-XW-nbq" id="m0R-Ea-3MJ">
+                                            <segue destination="c4Q-Hi-JDp" kind="popover" identifier="Show Favorite Graphs" popoverAnchorBarButtonItem="iKq-XW-nbq" id="m0R-Ea-3MJ">
                                                 <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                             </segue>
                                         </connections>
