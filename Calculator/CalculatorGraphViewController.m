@@ -99,6 +99,10 @@
             [defaults setObject:favorites forKey:FAVORITES_KEY];
             [defaults synchronize];
         }
+        if (self.favoritesPopoverController) {
+            CalculatorFavoritesTableViewController *favoritesTVC = (CalculatorFavoritesTableViewController *) self.favoritesPopoverController.contentViewController;
+            [favoritesTVC setFavorites:favorites];
+        }
     }
 }
 
