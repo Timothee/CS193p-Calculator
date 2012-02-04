@@ -12,7 +12,7 @@
 
 @interface GraphViewController() <GraphingViewDataSource, FavoriteTableViewControllerDelegate, UIPopoverControllerDelegate>
 @property (nonatomic, weak) IBOutlet GraphingCalculatorView *graphView;
-@property (nonatomic, weak) UIPopoverController *favoritesPopoverController;
+@property (nonatomic, strong) UIPopoverController *favoritesPopoverController;
 @end
 
 @implementation GraphViewController
@@ -23,6 +23,7 @@
 @synthesize toolbar = _toolbar;
 @synthesize favoritesPopoverController = _favoritesPopoverController;
 
+#define FAVORITES_KEY @"GraphViewController.Favorites"
 
 -(void)setFunctionDisplayText {
     self.functionDisplay.text = [NSString stringWithFormat:@"y = %@", [CalculatorBrain descriptionOfProgram:self.program]];
@@ -58,8 +59,6 @@
     
     self.graphView.dataSource = self;
 }
-
-#define FAVORITES_KEY @"GraphViewController.Favorites"
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"Show Favorite Graphs"]) {
@@ -157,7 +156,8 @@
 }
 
 #pragma mark - FavoriteTableViewControllerDelegate implementation
--(void)favoriteTableViewController:(FavoriteTableViewController *)sender didSelectFavoriteProgram:(id)program {
+-(void)favoriteTableViewController:(FavoriteTableViewController *)sender
+          didSelectFavoriteProgram:(id)program {
     self.program = program;
     // next two lines rely on the fact that self.favoritesPopoverController is nil if on iPhone
     // and navigationController is nil if on iPad.
@@ -166,12 +166,14 @@
     [self.navigationController popViewControllerAnimated:YES]; // for iPhone version
 }
 
--(void)favoriteTableViewController:(FavoriteTableViewController *)sender didDeleteFavoriteProgram:(id)program {
+-(void)favoriteTableViewController:(FavoriteTableViewController *)sender
+          didDeleteFavoriteProgram:(id)program {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSMutableArray *favorites = [[defaults objectForKey:FAVORITES_KEY] mutableCopy];
     [favorites removeObject:program];
     [defaults setObject:favorites forKey:FAVORITES_KEY];
     [defaults synchronize];
+    sender.favorites = favorites;
 }
 
 -(NSArray *)favoritesForFavoriteTableViewController:(FavoriteTableViewController *)sender {

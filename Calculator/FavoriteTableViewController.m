@@ -15,6 +15,13 @@
 @synthesize favorites = _favorites;
 @synthesize delegate = _delegate;
 
+
+-(void)setFavorites:(NSArray *)favorites {
+    _favorites = favorites;
+    [self.tableView reloadData];
+}
+
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -72,7 +79,7 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 #pragma mark - Table view data source
@@ -86,7 +93,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return self.favorites.count;
+    return [self.favorites count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -107,7 +114,7 @@
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return [self.delegate respondsToSelector:@selector(favoriteTableViewController:didDeleteFavoriteProgram:)];
 }
 
 // Override to support editing the table view.
@@ -116,11 +123,6 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         [self.delegate favoriteTableViewController:self didDeleteFavoriteProgram:[self.favorites objectAtIndex:indexPath.row]];
-        self.favorites = [self.delegate favoritesForFavoriteTableViewController:self];
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
 

@@ -10,13 +10,12 @@
 
 @class FavoriteTableViewController;
 
-@protocol FavoriteTableViewControllerDelegate
--(void)favoriteTableViewController:(FavoriteTableViewController *)sender
-          didDeleteFavoriteProgram:(id)program;
--(NSArray *)favoritesForFavoriteTableViewController:(FavoriteTableViewController *)sender;
+@protocol FavoriteTableViewControllerDelegate <NSObject>
 @optional
 -(void)favoriteTableViewController:(FavoriteTableViewController *)sender
           didSelectFavoriteProgram:(id)program;
+-(void)favoriteTableViewController:(FavoriteTableViewController *)sender
+          didDeleteFavoriteProgram:(id)program;
 @end
 
 @interface FavoriteTableViewController : UITableViewController
