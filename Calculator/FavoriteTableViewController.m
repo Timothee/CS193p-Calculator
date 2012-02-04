@@ -44,9 +44,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    if (self.navigationController) { // iPhone storyboard
+        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(dismissModalViewControllerAnimated:)];
+        self.navigationItem.leftBarButtonItem = cancelButton;
+    }
 }
 
 - (void)viewDidUnload

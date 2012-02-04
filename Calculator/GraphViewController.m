@@ -67,11 +67,16 @@
             self.favoritesPopoverController = [(UIStoryboardPopoverSegue *)segue popoverController];
             self.favoritesPopoverController.delegate = self;
         }
-        id favoriteTVC = segue.destinationViewController;
-        if ([favoriteTVC isKindOfClass:[FavoriteTableViewController class]]) {
-            [favoriteTVC setFavorites:[[NSUserDefaults standardUserDefaults] objectForKey:FAVORITES_KEY]];
-            [favoriteTVC setDelegate:self];
+        id destinationVC = segue.destinationViewController;
+        FavoriteTableViewController *favoriteTVC;
+        if ([destinationVC isKindOfClass:[FavoriteTableViewController class]]) { // iPad
+            favoriteTVC = destinationVC;
+        } else if ([destinationVC isKindOfClass:[UINavigationController class]]) { // iPhone
+            UINavigationController *navigationController = destinationVC;
+            favoriteTVC = (FavoriteTableViewController *) navigationController.topViewController;
         }
+        favoriteTVC.favorites = [[NSUserDefaults standardUserDefaults] objectForKey:FAVORITES_KEY];
+        favoriteTVC.delegate = self;
     }
 }
 
@@ -163,7 +168,7 @@
     // and navigationController is nil if on iPad.
     // That works, but is it really proper and clean?
     [self.favoritesPopoverController dismissPopoverAnimated:YES]; // for iPad version
-    [self.navigationController popViewControllerAnimated:YES]; // for iPhone version
+    [sender dismissModalViewControllerAnimated:YES]; // for iPhone version
 }
 
 -(void)favoriteTableViewController:(FavoriteTableViewController *)sender
