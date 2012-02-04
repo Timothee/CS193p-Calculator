@@ -3,7 +3,7 @@
 //  Calculator
 //
 //  Created by Timothée Boucher on 12/22/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -11,15 +11,15 @@
 #define GRAPH_MODE_LINE @"line"
 #define GRAPH_MODE_POINT @"point"
 
-@class GraphingCalculatorView;
+@class CalculatorGraphView;
 
 @protocol GraphingViewDataSource
--(double) yForXValue:(double)x forGraphingView:(GraphingCalculatorView *)sender;
+-(double) yForXValue:(double)x forGraphingView:(CalculatorGraphView *)sender;
 @end
 
 
 
-@interface GraphingCalculatorView : UIView
+@interface CalculatorGraphView : UIView
 
 @property (nonatomic, weak) IBOutlet id <GraphingViewDataSource> dataSource;
 @property (nonatomic, strong) NSString *graphMode;

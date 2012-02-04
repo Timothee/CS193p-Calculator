@@ -6,11 +6,11 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "FavoriteTableViewController.h"
+#import "CalculatorFavoritesTableViewController.h"
 #import "CalculatorBrain.h"
 
 
-@implementation FavoriteTableViewController
+@implementation CalculatorFavoritesTableViewController
 
 @synthesize favorites = _favorites;
 @synthesize delegate = _delegate;

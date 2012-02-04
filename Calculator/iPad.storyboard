@@ -8,12 +8,12 @@
         <scene sceneID="yfn-lP-2sO">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8OT-OF-asC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="Xr3-cE-W5f" customClass="GraphViewController" sceneMemberID="viewController">
+                <viewController id="Xr3-cE-W5f" customClass="CalculatorGraphViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AXw-oa-EPf">
                         <rect key="frame" x="0.0" y="20" width="703" height="748"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="gSU-Nk-SVl" customClass="GraphingCalculatorView">
+                            <view contentMode="scaleToFill" id="gSU-Nk-SVl" customClass="CalculatorGraphView">
                                 <rect key="frame" x="0.0" y="44" width="703" height="704"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -503,7 +503,7 @@
         <scene sceneID="VLB-sY-fNd">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pa7-c9-Zxy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="c4Q-Hi-JDp" customClass="FavoriteTableViewController" sceneMemberID="viewController">
+                <tableViewController id="c4Q-Hi-JDp" customClass="CalculatorFavoritesTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="A31-YW-1Ei">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

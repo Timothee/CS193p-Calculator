@@ -3,12 +3,12 @@
 //  Calculator
 //
 //  Created by Timothée Boucher on 11/30/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import "CalculatorViewController.h"
 #import "CalculatorBrain.h"
-#import "GraphViewController.h"
+#import "CalculatorGraphViewController.h"
 
 @interface CalculatorViewController()
 @property (nonatomic) BOOL userIsInTheMiddleOfEnteringANumber;
@@ -177,9 +177,9 @@
 }
 
 // Gets GraphViewController if any, that is, if in a split view.
-- (GraphViewController *)splitViewGraphViewController {
+- (CalculatorGraphViewController *)splitViewGraphViewController {
     id gvc = [self.splitViewController.viewControllers lastObject];
-    if (![gvc isKindOfClass:[GraphViewController class]]) {
+    if (![gvc isKindOfClass:[CalculatorGraphViewController class]]) {
         gvc = nil;
     }
     return gvc;

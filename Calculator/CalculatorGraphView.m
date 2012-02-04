@@ -3,18 +3,18 @@
 //  Calculator
 //
 //  Created by Timothée Boucher on 12/22/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "GraphingCalculatorView.h"
+#import "CalculatorGraphView.h"
 #import "AxesDrawer.h"
 
-@interface GraphingCalculatorView()
+@interface CalculatorGraphView()
 @property (nonatomic) float scale;
 @property (nonatomic) CGPoint origin;
 @end
 
-@implementation GraphingCalculatorView
+@implementation CalculatorGraphView
 
 @synthesize dataSource = _dataSource;
 @synthesize scale = _scale;

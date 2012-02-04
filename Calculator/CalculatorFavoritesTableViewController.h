@@ -8,17 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@class FavoriteTableViewController;
+@class CalculatorFavoritesTableViewController;
 
 @protocol FavoriteTableViewControllerDelegate <NSObject>
 @optional
--(void)favoriteTableViewController:(FavoriteTableViewController *)sender
+-(void)favoriteTableViewController:(CalculatorFavoritesTableViewController *)sender
           didSelectFavoriteProgram:(id)program;
--(void)favoriteTableViewController:(FavoriteTableViewController *)sender
+-(void)favoriteTableViewController:(CalculatorFavoritesTableViewController *)sender
           didDeleteFavoriteProgram:(id)program;
 @end
 
-@interface FavoriteTableViewController : UITableViewController
+@interface CalculatorFavoritesTableViewController : UITableViewController
 @property (nonatomic, strong) NSArray *favorites;
 @property (nonatomic, weak) id <FavoriteTableViewControllerDelegate> delegate;
 

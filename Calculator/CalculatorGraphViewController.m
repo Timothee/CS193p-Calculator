@@ -3,19 +3,19 @@
 //  Calculator
 //
 //  Created by Timothée Boucher on 12/22/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "GraphViewController.h"
+#import "CalculatorGraphViewController.h"
 #import "CalculatorBrain.h"
-#import "FavoriteTableViewController.h"
+#import "CalculatorFavoritesTableViewController.h"
 
-@interface GraphViewController() <GraphingViewDataSource, FavoriteTableViewControllerDelegate, UIPopoverControllerDelegate>
-@property (nonatomic, weak) IBOutlet GraphingCalculatorView *graphView;
+@interface CalculatorGraphViewController() <GraphingViewDataSource, FavoriteTableViewControllerDelegate, UIPopoverControllerDelegate>
+@property (nonatomic, weak) IBOutlet CalculatorGraphView *graphView;
 @property (nonatomic, strong) UIPopoverController *favoritesPopoverController;
 @end
 
-@implementation GraphViewController
+@implementation CalculatorGraphViewController
 
 @synthesize functionDisplay = _functionDisplay;
 @synthesize program = _program;
@@ -37,7 +37,7 @@
     }
 }
 
--(void)setGraphView:(GraphingCalculatorView *)graphView {
+-(void)setGraphView:(CalculatorGraphView *)graphView {
     _graphView = graphView;
     
     [self.graphView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self.graphView action:@selector(pinch:)]];
@@ -68,12 +68,12 @@
             self.favoritesPopoverController.delegate = self;
         }
         id destinationVC = segue.destinationViewController;
-        FavoriteTableViewController *favoriteTVC;
-        if ([destinationVC isKindOfClass:[FavoriteTableViewController class]]) { // iPad
+        CalculatorFavoritesTableViewController *favoriteTVC;
+        if ([destinationVC isKindOfClass:[CalculatorFavoritesTableViewController class]]) { // iPad
             favoriteTVC = destinationVC;
         } else if ([destinationVC isKindOfClass:[UINavigationController class]]) { // iPhone
             UINavigationController *navigationController = destinationVC;
-            favoriteTVC = (FavoriteTableViewController *) navigationController.topViewController;
+            favoriteTVC = (CalculatorFavoritesTableViewController *) navigationController.topViewController;
         }
         favoriteTVC.favorites = [[NSUserDefaults standardUserDefaults] objectForKey:FAVORITES_KEY];
         favoriteTVC.delegate = self;
@@ -150,7 +150,7 @@
 
 
 #pragma mark - GraphViewDelegate protocol implementation
--(double)yForXValue:(double)x forGraphingView:(GraphingCalculatorView *)sender {
+-(double)yForXValue:(double)x forGraphingView:(CalculatorGraphView *)sender {
     id y = [CalculatorBrain runProgram:self.program usingVariableValues:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:x], @"x", nil]];
     if ([y isKindOfClass:[NSString class]]) {
         y = [NSNumber numberWithDouble:0.0];
@@ -161,7 +161,7 @@
 }
 
 #pragma mark - FavoriteTableViewControllerDelegate implementation
--(void)favoriteTableViewController:(FavoriteTableViewController *)sender
+-(void)favoriteTableViewController:(CalculatorFavoritesTableViewController *)sender
           didSelectFavoriteProgram:(id)program {
     self.program = program;
     // next two lines rely on the fact that self.favoritesPopoverController is nil if on iPhone
@@ -171,7 +171,7 @@
     [sender dismissModalViewControllerAnimated:YES]; // for iPhone version
 }
 
--(void)favoriteTableViewController:(FavoriteTableViewController *)sender
+-(void)favoriteTableViewController:(CalculatorFavoritesTableViewController *)sender
           didDeleteFavoriteProgram:(id)program {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSMutableArray *favorites = [[defaults objectForKey:FAVORITES_KEY] mutableCopy];
@@ -181,7 +181,7 @@
     sender.favorites = favorites;
 }
 
--(NSArray *)favoritesForFavoriteTableViewController:(FavoriteTableViewController *)sender {
+-(NSArray *)favoritesForFavoriteTableViewController:(CalculatorFavoritesTableViewController *)sender {
     return [[[NSUserDefaults standardUserDefaults] objectForKey:FAVORITES_KEY] copy];
 }
 

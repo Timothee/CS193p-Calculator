@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3B4BF1EF14A3C35400AEC565 /* AxesDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4BF1EE14A3C35400AEC565 /* AxesDrawer.m */; };
-		3B4BF1F414A3C38C00AEC565 /* GraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4BF1F214A3C38C00AEC565 /* GraphViewController.m */; };
-		3B4BF1F814A3E6D900AEC565 /* GraphingCalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4BF1F714A3E6D900AEC565 /* GraphingCalculatorView.m */; };
+		3B4BF1F414A3C38C00AEC565 /* CalculatorGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4BF1F214A3C38C00AEC565 /* CalculatorGraphViewController.m */; };
+		3B4BF1F814A3E6D900AEC565 /* CalculatorGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4BF1F714A3E6D900AEC565 /* CalculatorGraphView.m */; };
 		3B681D3F14B7B5E0006DB563 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B681D3E14B7B5E0006DB563 /* iPad.storyboard */; };
 		3B84CE84148704A700FAF49C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B84CE83148704A700FAF49C /* UIKit.framework */; };
 		3B84CE86148704A700FAF49C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B84CE85148704A700FAF49C /* Foundation.framework */; };
@@ -20,16 +20,16 @@
 		3B84CE97148704A700FAF49C /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B84CE95148704A700FAF49C /* iPhone.storyboard */; };
 		3B84CE9A148704A700FAF49C /* CalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B84CE99148704A700FAF49C /* CalculatorViewController.m */; };
 		3B84CEA21488514100FAF49C /* CalculatorBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B84CEA11488514100FAF49C /* CalculatorBrain.m */; };
-		3B85DA9814D36C1A00E00A16 /* FavoriteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B85DA9714D36C1A00E00A16 /* FavoriteTableViewController.m */; };
+		3B85DA9814D36C1A00E00A16 /* CalculatorFavoritesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B85DA9714D36C1A00E00A16 /* CalculatorFavoritesTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3B4BF1ED14A3C35400AEC565 /* AxesDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AxesDrawer.h; sourceTree = "<group>"; };
 		3B4BF1EE14A3C35400AEC565 /* AxesDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxesDrawer.m; sourceTree = "<group>"; };
-		3B4BF1F114A3C38C00AEC565 /* GraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphViewController.h; sourceTree = "<group>"; };
-		3B4BF1F214A3C38C00AEC565 /* GraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
-		3B4BF1F614A3E6D900AEC565 /* GraphingCalculatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphingCalculatorView.h; sourceTree = "<group>"; };
-		3B4BF1F714A3E6D900AEC565 /* GraphingCalculatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphingCalculatorView.m; sourceTree = "<group>"; };
+		3B4BF1F114A3C38C00AEC565 /* CalculatorGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = CalculatorGraphViewController.h; sourceTree = "<group>"; };
+		3B4BF1F214A3C38C00AEC565 /* CalculatorGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorGraphViewController.m; sourceTree = "<group>"; };
+		3B4BF1F614A3E6D900AEC565 /* CalculatorGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; path = CalculatorGraphView.h; sourceTree = "<group>"; };
+		3B4BF1F714A3E6D900AEC565 /* CalculatorGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorGraphView.m; sourceTree = "<group>"; };
 		3B681D3E14B7B5E0006DB563 /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
 		3B84CE7F148704A700FAF49C /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B84CE83148704A700FAF49C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -46,8 +46,8 @@
 		3B84CE99148704A700FAF49C /* CalculatorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalculatorViewController.m; sourceTree = "<group>"; };
 		3B84CEA01488514100FAF49C /* CalculatorBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorBrain.h; sourceTree = "<group>"; };
 		3B84CEA11488514100FAF49C /* CalculatorBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorBrain.m; sourceTree = "<group>"; };
-		3B85DA9614D36C1900E00A16 /* FavoriteTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteTableViewController.h; sourceTree = "<group>"; };
-		3B85DA9714D36C1A00E00A16 /* FavoriteTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteTableViewController.m; sourceTree = "<group>"; };
+		3B85DA9614D36C1900E00A16 /* CalculatorFavoritesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = CalculatorFavoritesTableViewController.h; sourceTree = "<group>"; };
+		3B85DA9714D36C1A00E00A16 /* CalculatorFavoritesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorFavoritesTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,14 +100,14 @@
 				3B84CEA11488514100FAF49C /* CalculatorBrain.m */,
 				3B84CE98148704A700FAF49C /* CalculatorViewController.h */,
 				3B84CE99148704A700FAF49C /* CalculatorViewController.m */,
-				3B4BF1F114A3C38C00AEC565 /* GraphViewController.h */,
-				3B4BF1F214A3C38C00AEC565 /* GraphViewController.m */,
-				3B4BF1F614A3E6D900AEC565 /* GraphingCalculatorView.h */,
-				3B4BF1F714A3E6D900AEC565 /* GraphingCalculatorView.m */,
+				3B4BF1F114A3C38C00AEC565 /* CalculatorGraphViewController.h */,
+				3B4BF1F214A3C38C00AEC565 /* CalculatorGraphViewController.m */,
+				3B4BF1F614A3E6D900AEC565 /* CalculatorGraphView.h */,
+				3B4BF1F714A3E6D900AEC565 /* CalculatorGraphView.m */,
 				3B4BF1ED14A3C35400AEC565 /* AxesDrawer.h */,
 				3B4BF1EE14A3C35400AEC565 /* AxesDrawer.m */,
-				3B85DA9614D36C1900E00A16 /* FavoriteTableViewController.h */,
-				3B85DA9714D36C1A00E00A16 /* FavoriteTableViewController.m */,
+				3B85DA9614D36C1900E00A16 /* CalculatorFavoritesTableViewController.h */,
+				3B85DA9714D36C1A00E00A16 /* CalculatorFavoritesTableViewController.m */,
 				3B681D3E14B7B5E0006DB563 /* iPad.storyboard */,
 				3B84CE95148704A700FAF49C /* iPhone.storyboard */,
 				3B84CE8A148704A700FAF49C /* Supporting Files */,
@@ -194,9 +194,9 @@
 				3B84CE9A148704A700FAF49C /* CalculatorViewController.m in Sources */,
 				3B84CEA21488514100FAF49C /* CalculatorBrain.m in Sources */,
 				3B4BF1EF14A3C35400AEC565 /* AxesDrawer.m in Sources */,
-				3B4BF1F414A3C38C00AEC565 /* GraphViewController.m in Sources */,
-				3B4BF1F814A3E6D900AEC565 /* GraphingCalculatorView.m in Sources */,
-				3B85DA9814D36C1A00E00A16 /* FavoriteTableViewController.m in Sources */,
+				3B4BF1F414A3C38C00AEC565 /* CalculatorGraphViewController.m in Sources */,
+				3B4BF1F814A3E6D900AEC565 /* CalculatorGraphView.m in Sources */,
+				3B85DA9814D36C1A00E00A16 /* CalculatorFavoritesTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
